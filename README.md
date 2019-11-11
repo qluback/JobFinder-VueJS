@@ -1,5 +1,10 @@
 # jobfinder
 
+Afficher liste de jobs depuis API github
+Permettre de choisir entre des catégories
+Mettre en favori des jobs
+Cliquer sur des catégories déjà utilisées
+
 ## Project setup
 ```
 yarn install
