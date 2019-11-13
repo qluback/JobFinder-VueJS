@@ -1,10 +1,10 @@
 <template>
-  <div>
+  <main class="offerList">
     <offer-search></offer-search>
-    <ul v-if="jobs">
-      <offer-item v-for="job in jobs" :key="job.id" :job="job"></offer-item>
+    <ul class="offerList__items">
+      <offer-item v-for="(job, index) in jobs" :key="index" :idOffer="index" :job="job"></offer-item>
     </ul>
-  </div>
+  </main>
 </template>
 
 <script lang="ts">
@@ -21,9 +21,20 @@ export default Vue.extend({
   computed: {
     ...mapState('jobs', ['jobs']),
   },
+  beforeMount() {
+    this.$store.dispatch('jobs/showRecentJobs')
+  }
 });
 </script>
 
 <style lang="scss" scoped>
+  .offerList {
+    
 
+    &__items {
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+  }
 </style>

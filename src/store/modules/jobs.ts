@@ -2,13 +2,6 @@ import Job from '@/models/job';
 import { Module } from 'vuex';
 import axios from 'axios';
 
-function getJobsFromApi(): Array<any> {
-  let tab: Array<Promise<Object>> = []
-  axios.get('https://github-jobs-proxy.appspot.com/positions?description=javascript&location=new+york').then(response => tab.push(response.data))
-  console.log(tab)
-  return tab;
-}
-
 const jobs: Module<{ jobs: Array<Job[]>}, any> = {
     namespaced: true,
     state: {
@@ -20,16 +13,32 @@ const jobs: Module<{ jobs: Array<Job[]>}, any> = {
     mutations: {
       search(state, payload) {
         state.jobs = payload
-        console.log(state.jobs)
+      },
+      showRecentJobs(state, payload) {
+        state.jobs = payload
       }
     },
     actions: {
-      search(context, payload: { position: string }) {
+      showRecentJobs(context) {
         axios
-          .get('https://github-jobs-proxy.appspot.com/positions?description=javascript&location=' + payload.position)
+          .get('https://github-jobs-proxy.appspot.com/positions?description=&location=')
           .then(response => {
-            console.log(response.data)
-            context.commit('search', response.data);
+              context.commit('showRecentJobs', response.data);
+          })
+      },
+      search(context, payload: { position: string, description: string, fullTime: boolean }) {
+        axios
+          .get('https://github-jobs-proxy.appspot.com/positions?description=' + payload.description + '&location=' + payload.position)
+          .then(response => {
+            if(payload.fullTime) {
+              let jobsFullTime = response.data.filter((job: any) => job.type == 'Full Time')
+              console.log(jobsFullTime)
+              context.commit('search', jobsFullTime);
+            }
+            else {
+              console.log(response.data)
+              context.commit('search', response.data);
+            }
           })
       }
     }
