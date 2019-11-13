@@ -12,16 +12,26 @@ function getJobsFromApi(): Array<any> {
 const jobs: Module<{ jobs: Array<Job[]>}, any> = {
     namespaced: true,
     state: {
-      jobs: getJobsFromApi(),
+      jobs: [],
     },
     getters: {
 
     },
     mutations: {
-
+      search(state, payload) {
+        state.jobs = payload
+        console.log(state.jobs)
+      }
     },
     actions: {
-        
+      search(context, payload: { position: string }) {
+        axios
+          .get('https://github-jobs-proxy.appspot.com/positions?description=javascript&location=' + payload.position)
+          .then(response => {
+            console.log(response.data)
+            context.commit('search', response.data);
+          })
+      }
     }
 };
 
