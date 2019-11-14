@@ -9,8 +9,13 @@
     <p>{{ job.created_at }}</p>
     <div class="containerButtonShowJob">
       <a @click="showDetails(idOffer)" class="containerButtonShowJob__button">Voir le job</a>
-      <a v-if="isFav(job.id)" @click="removeFavoriteJob(job.id)" class="containerButtonShowJob__button isSmall"><img class="containerButtonShowJob__button__fav" src="../../assets/img/heart-fill.png" /></a>
-      <a v-else @click="setFavoriteJob(job.id)" class="containerButtonShowJob__button isSmall"><img class="containerButtonShowJob__button__fav" src="../../assets/img/heart-line.png" /></a>
+      
+      <a v-if="isFav(job.id)" @click="removeFavoriteJob(job.id)" class="containerButtonShowJob__button isSmall">
+        <img class="containerButtonShowJob__button__fav" src="../../assets/img/heart-fill.png" />
+      </a>
+      <a v-else @click="setFavoriteJob(job.id)" class="containerButtonShowJob__button isSmall">
+        <img class="containerButtonShowJob__button__fav" src="../../assets/img/heart-line.png" />
+      </a>
     </div>
   </li>
 </template>
@@ -38,7 +43,7 @@ export default Vue.extend({
     removeFavoriteJob(idJob: string): void {
       this.$store.dispatch('jobsFavorite/removeFavoriteJob', { id: idJob })
     },
-    isFav(id: string) {
+    isFav(id: string) { // if we find an id from favorite jobs, then display an "UnFavorite" button in the template
       let idFound = this.jobsFavorite.filter((jobId: any) => jobId.id == id)
       if(idFound.length != 0) {
         return true;
@@ -46,7 +51,6 @@ export default Vue.extend({
       else {
         return false;
       }
-      console.log(idFound)
     }
   }
 });

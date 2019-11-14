@@ -2,8 +2,17 @@
  <main class="offerDetails">
    <div class="offerDetails__infos">
     <img v-bind:src="jobs[$route.params.id].company_logo" class="offerDetails__logo" />
-    <a class="offerDetails__company" v-if="jobs[$route.params.id].title != 'http:'" v-bind:href="jobs[$route.params.id].title" target='_blank'>{{ jobs[$route.params.id].company }}</a>
+    
+    <a 
+      class="offerDetails__company" 
+      v-if="jobs[$route.params.id].title != 'http:'" 
+      v-bind:href="jobs[$route.params.id].title" 
+      target='_blank'
+    >
+      {{ jobs[$route.params.id].company }}
+    </a>
     <p class="offerDetails__company" v-else>{{ jobs[$route.params.id].company }}</p>
+    
     <h1 class="offerDetails__title">{{ jobs[$route.params.id].title }}</h1>
     <div class="offerDetails__typeLocRow">
       <p class="offerDetails__typeLocRow__text">{{ jobs[$route.params.id].type }}</p>

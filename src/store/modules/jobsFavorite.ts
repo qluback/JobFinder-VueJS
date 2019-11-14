@@ -8,18 +8,14 @@ const jobsFavorite: Module<{ jobsFavorite: Array<JobFavorite>}, any> = {
   },
   mutations: {
     setFavoriteJob(state, payload) {
-      console.log(payload)
       state.jobsFavorite.push({id: payload});
-      console.log(state.jobsFavorite)
     },
     removeFavoriteJob(state, payload) {
       state.jobsFavorite = state.jobsFavorite.filter((jobId) => jobId.id != payload);
-      console.log(state.jobsFavorite)
     },
   },
   actions: {
     setFavoriteJob(context, payload: { id: string }) {
-      console.log('action ' + payload.id)
       context.commit('setFavoriteJob', payload.id);
     },
     removeFavoriteJob(context, payload: { id: string }) {
