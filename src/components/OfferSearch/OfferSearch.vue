@@ -59,6 +59,9 @@ export default Vue.extend({
     display: flex;
     flex-direction: column;
     font-size: 18px;
+    background: #3e64ff;
+    padding: 20px 10px;
+    box-shadow: 0 0 10px #555;
 
     &__input {
       margin-bottom: 10px;
@@ -67,16 +70,22 @@ export default Vue.extend({
       border: none;
       border-top: 1px solid #3e64ff;
       border-bottom: 1px solid #3e64ff;
+      border-radius: 5px;
       color: #3e64ff;
+      font-family: 'Montserrat';
+      font-weight: 500;
     }
 
     &__submit {
-      background: #3e64ff;
+      background: #ff3e75;
       font-weight: 700;
       border: none;
+      border-radius: 5px;
       color: #fff;
       padding: 15px;
       font-size: 18px;
+      font-family: 'Montserrat';
+      cursor: pointer;
     }
   }
 
@@ -89,6 +98,8 @@ export default Vue.extend({
       color: #3e64ff;
       padding: 10px 0 10px 10px;
       margin-bottom: 10px;
+      background: #fff;
+      border-radius: 5px;
 
       &__input {
         margin-left: 0;
@@ -97,7 +108,8 @@ export default Vue.extend({
       }
 
       &__label {
-
+        font-weight: 500;
+        margin-left: 4px;
       }
     }
 

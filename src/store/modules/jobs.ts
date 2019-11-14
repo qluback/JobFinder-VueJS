@@ -23,7 +23,8 @@ const jobs: Module<{ jobs: Array<Job[]>}, any> = {
         axios
           .get('https://github-jobs-proxy.appspot.com/positions?description=&location=')
           .then(response => {
-              context.commit('showRecentJobs', response.data);
+            console.log(response.data)
+            context.commit('showRecentJobs', response.data);
           })
       },
       search(context, payload: { position: string, description: string, fullTime: boolean }) {
