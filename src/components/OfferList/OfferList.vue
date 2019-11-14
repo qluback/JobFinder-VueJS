@@ -29,8 +29,6 @@ export default Vue.extend({
 
 <style lang="scss" scoped>
   .offerList {
-    
-
     &__items {
       display: flex;
       flex-direction: column;

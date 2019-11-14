@@ -13,14 +13,15 @@
       class="offerForm__input"
     />
     <div class="containerCheckbox">
-      <input
-        id="fulltime"
-        type="checkbox"
-        placeholder="Description..."
-        v-model="fullTime"
-        class="containerCheckbox__input"
-      />
-      <label for="fulltime" class="containerCheckbox__label">Full-Time</label>
+      <div class="containerCheckbox__element">
+        <input
+          id="fulltime"
+          type="checkbox"
+          v-model="fullTime"
+          class="containerCheckbox__input"
+        />
+        <label for="fulltime" class="containerCheckbox__label">Full-Time</label>
+      </div>
     </div>
     <button class="offerForm__submit">Rechercher</button>
   </form>
@@ -30,14 +31,14 @@
 import Vue from 'vue';
 
 export default Vue.extend({
-  data(): { position: string, description: string, fullTime: boolean } {
+  data(): { position: string, description: string, fullTime: boolean} {
     return {
       position: '',
       description: '',
-      fullTime: false
+      fullTime: false,
     }
   },
- methods: {
+  methods: {
     searchOffers(): void {
       if(this.position.length) {
         this.$store.dispatch('jobs/search', { 
@@ -45,9 +46,6 @@ export default Vue.extend({
           description: this.description,
           fullTime: this.fullTime,
         })
-        // this.position = ''
-        // this.description = ''
-        // this.fullTime = false
       }
     }
   }
@@ -92,14 +90,20 @@ export default Vue.extend({
   .containerCheckbox {
       display: flex;
       align-items: center;
+      justify-content: space-between;
       border: none;
       border-top: 1px solid #3e64ff;
       border-bottom: 1px solid #3e64ff;
       color: #3e64ff;
-      padding: 10px 0 10px 10px;
+      padding: 10px;
       margin-bottom: 10px;
       background: #fff;
       border-radius: 5px;
+
+      &__element {
+        display: flex;
+        align-items: center;
+      }
 
       &__input {
         margin-left: 0;

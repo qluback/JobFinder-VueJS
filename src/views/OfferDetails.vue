@@ -8,8 +8,8 @@
     <div class="offerDetails__typeLocRow">
       <p class="offerDetails__typeLocRow__text">{{ jobs[$route.params.id].type }}</p>
       <p class="offerDetails__typeLocRow__text">{{ jobs[$route.params.id].location }}</p>
+      <p class="offerDetails__typeLocRow__text">{{ jobs[$route.params.id].created_at }}</p>
     </div>
-    <p>{{ jobs[$route.params.id].created_at }}</p>
   </div>
   <div class="offerDetails__descrContainer">
     <h2 class="offerDetails__descrContainer__title">Description de l'offre</h2>
@@ -27,11 +27,6 @@ export default Vue.extend({
   computed: {
     ...mapState('jobs', ['jobs'])
   },
-  methods: {
-    moment: function () {
-      return moment();
-    }
-  }
 });
 </script>
 
@@ -63,9 +58,10 @@ export default Vue.extend({
 
     &__typeLocRow {
       display: flex;
+      flex-direction: column;
 
       &__text {
-        margin: 0 10px;
+        margin: 5px 10px;
       }
     }
 

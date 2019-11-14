@@ -9,22 +9,44 @@
     <p>{{ job.created_at }}</p>
     <div class="containerButtonShowJob">
       <a @click="showDetails(idOffer)" class="containerButtonShowJob__button">Voir le job</a>
+      <a v-if="isFav(job.id)" @click="removeFavoriteJob(job.id)" class="containerButtonShowJob__button isSmall"><img class="containerButtonShowJob__button__fav" src="../../assets/img/heart-fill.png" /></a>
+      <a v-else @click="setFavoriteJob(job.id)" class="containerButtonShowJob__button isSmall"><img class="containerButtonShowJob__button__fav" src="../../assets/img/heart-line.png" /></a>
     </div>
   </li>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import Job from '@/models/job'
+import Job from '@/models/job';
+import { mapState } from 'vuex';
 
 export default Vue.extend({
   props: {
     idOffer: Number,
     job: Object as () => Job,
   },
+  computed: {
+    ...mapState('jobsFavorite', ['jobsFavorite']),
+  },
   methods: {
     showDetails(key: string) {
-      this.$router.push({name: 'details', params: {id: key}})
+      this.$router.push({name: 'details', params: { id: key }})
+    },
+    setFavoriteJob(idJob: string) {
+      this.$store.dispatch('jobsFavorite/setFavoriteJob', { id: idJob })
+    },
+    removeFavoriteJob(idJob: string): void {
+      this.$store.dispatch('jobsFavorite/removeFavoriteJob', { id: idJob })
+    },
+    isFav(id: string) {
+      let idFound = this.jobsFavorite.filter((jobId: any) => jobId.id == id)
+      if(idFound.length != 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
+      console.log(idFound)
     }
   }
 });
@@ -61,12 +83,24 @@ export default Vue.extend({
       border: none;
       border-radius: 5px;
       color: #fff;
-      padding: 15px;
+      padding: 10px;
       font-size: 18px;
       font-family: 'Montserrat';
       cursor: pointer;
       width: 50%;
       text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px;
+
+      &__fav {
+        width: 40px;
+      }
     }
+  }
+
+  .isSmall {
+    width: 20%;
   }
 </style>
