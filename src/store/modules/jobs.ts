@@ -21,7 +21,7 @@ const jobs: Module<{ jobs: Array<Job[]>}, any> = {
     showRecentJobs(context) { // Get list of 50 newest jobs on homepage
       axios
         .get('https://github-jobs-proxy.appspot.com/positions?description=&location=')
-        .then(response => {
+        .then((response) => {
           context.commit('showRecentJobs', response.data);
         })
     },
@@ -30,11 +30,10 @@ const jobs: Module<{ jobs: Array<Job[]>}, any> = {
         .get('https://github-jobs-proxy.appspot.com/positions?description=' + payload.description + '&location=' + payload.position)
         .then(response => {
           if(payload.fullTime) { // Test if user wants only full-time jobs
-            let jobsFullTime = response.data.filter((job: any) => job.type == 'Full Time')
-            context.commit('search', jobsFullTime);
+            const jobsFullTime = response.data.filter((job: any) => job.type === 'Full Time')
+            context.commit('search', jobsFullTime)
           }
           else {
-
             context.commit('search', response.data);
           }
         })

@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">JobFinder</router-link>
+      <h1 class="nav__title"><router-link to="/">JobFinder</router-link></h1>
     </div>
     <router-view/>
   </div>

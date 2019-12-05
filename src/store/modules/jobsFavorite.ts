@@ -11,7 +11,7 @@ const jobsFavorite: Module<{ jobsFavorite: Array<JobFavorite>}, any> = {
       state.jobsFavorite.push({id: payload});
     },
     removeFavoriteJob(state, payload) {
-      state.jobsFavorite = state.jobsFavorite.filter((jobId) => jobId.id != payload);
+      state.jobsFavorite = state.jobsFavorite.filter((jobId) => jobId.id !== payload);
     },
   },
   actions: {
